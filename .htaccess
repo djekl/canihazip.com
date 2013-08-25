@@ -1,0 +1,16 @@
+#Set the timezone to GMT/UTC
+SetEnv TZ UTC
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+
+    RewriteBase /
+    RewriteRule ^(.*)$ index.php\?$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 /index.php
+</IfModule>
