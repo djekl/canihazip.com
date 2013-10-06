@@ -2,6 +2,10 @@
 
 $ip = $_SERVER['REMOTE_ADDR'];
 
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+}
+
 if ( isset($_SERVER['REDIRECT_QUERY_STRING']) && strtolower(str_replace('/', NULL, $_SERVER['REDIRECT_QUERY_STRING'])) == 's' ) {
     header("Content-Type: text/plain");
     print $ip;
