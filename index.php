@@ -1,5 +1,11 @@
 <?php
 
+// filter the input to help avoid XSS
+foreach ($_SERVER as $key => $value) {
+    $_SERVER[$key] = filter_input(INPUT_SERVER, $key, FILTER_SANITIZE_STRING);
+}
+ 
+
 $ip = $_SERVER['REMOTE_ADDR'];
 
 if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
